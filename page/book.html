@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>전주독서대전</title>
+	<link rel="stylesheet" href="/js/jquery-ui-1.12.1/jquery-ui.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="/js/jquery-3.5.1.js"></script>
+	<script src="/js/jquery-ui-1.12.1/jquery-ui.js"></script>
+	<script src="/js/bootstrap.bundle.js"></script>
+	<script src="/js/App.js"></script>
+</head>
+<body>
+	
+	<input type="radio" name="pop" id="pop_close">
+	
+	<!-- 온라인 에디터 -->
+	<div class="menu-con menu-pop w-100 h-100 position-fixed" id="edit_modal">
+		<div class="w-100 h-100 d-flex fl-cc">
+			<label for="pop_close" class="poa closeBtn t0 l0 w-100 h-100"></label>
+			<div class="itemBox por" style="width: 1200px;">
+				<div class="item p-4">
+					<div class="picBox w-100 h-100 d-flex fl-cc">
+						<div class="pic w-100 d-flex fl-cc font-weight-bold fz30 fc1 bg0 text-center">
+							온라인도서 에디터
+						</div>
+					</div>
+					<div class="cont p-4 d-flex fl-cc"  style="height: 750px;">
+						
+						<div class=" col-12  pdf_hideBox">
+		                    <div class=" col-12 d-flex justify-content-start mt-3 ">
+		                        <div class="bg3 fc1 p-2  col-2">도구영역</div>
+		                    </div>
+		                </div>
+		                <div class=" col-12 mt-1" id="edit">
+		                    <div class=" col-12 pdf_hideBox">
+		                        <div class=" col-12 d-flex justify-content-start mt-1">
+		                            <table class="table board">
+		                                <thead>
+		                                    <tr class="col-12 d-flex justify-content-between bg-light ">
+		                                    </tr>
+		                                </thead>
+		                            </table>
+
+		                            <div class="col-12 d-flex justify-content-end align-items-center " style="height: 50px;" id="page_box">
+		                                페이지 : <span id="c_page">1</span> / <span id="total_page">3</span>
+		                                <button class="bg-info h-100 p-2 fc1 at_sc12  ml-1 " type="button" id="new_btn">새 페이지</button>
+		                                <button class="bg-success h-100 p-2 fc1 at_sc12  ml-1 " type="button" id="prev_btn">이전 페이지</button>
+		                                <button class="bg-success h-100 p-2 fc1 at_sc12  ml-1 " type="button" id="next_btn">다음 페이지</button>
+		                            </div>
+		                            
+		                            <div class="col-7 mt-2" style="height: 50px;" id="btn_box">
+		                                <div class="w-100 h-100 d-flex justify-content-end align-items-center">
+		                                    <button class="bg0 h-100 p-2 fc1 at_sc12  ml-1 "  type="button" id="sel">선택</button>
+		                                    <button class="bg0 h-100 p-2 fc1  at_sc12  ml-1 " type="button" id="line">선</button>
+		                                    <button class="bg0 h-100 p-2 fc1  at_sc12  ml-1 " type="button" id="rect">사각형</button>
+		                                    <button class="bg0 h-100 p-2 fc1 at_sc12  ml-1 " type="button" id="cir">원형</button>
+		                                    <button class="bg0 h-100 p-2 fc1  at_sc12  ml-1"  type="button" id="tri">삼각형</button>
+		                                    <button class="bg0 h-100 p-2 fc1  at_sc12  ml-1"  type="button" id="txt">텍스트</button>
+		                                    <button class="bg0 h-100 p-2 fc1  at_sc12  ml-1"  type="button" id="del">지우개</button>
+		                                    <button class="bg2 h-100 p-2 fc1  at_sc12  ml-1"  type="button" id="img">사진선택</button>
+		                                    <button class="bg2 h-100 p-2 fc1  at_sc12  ml-1"  type="button" id="mov">영상선택</button>
+		                                </div>
+		                            </div>
+		                            <div class="col-5 d-flex justify-content-start align-items-center mt-2" style="height: 50px;" id="save_btn">
+		                                <button class="bg3 h-100 p-2 fc1  at_sc12  ml-1"  type="button" id="save_html">html문서로저장</button>
+		                                <button class="bg3 h-100 p-2 fc1  at_sc12  ml-1"  type="button" id="save_pdf">pdf문서로저장</button>
+		                            </div>
+		                            
+		                            <div class="col-12 d-flex justify-content-start align-items-center mt-2" style="height: 50px;" id="init_box">
+		                                <div class="ml-2 mr-2">테두리 색상 <input type="color"  id="line_color" class="border"></div>
+		                                <div class="ml-2 mr-2">채우기 색상 <input type="color"  id="fill_color" class="border"></div>
+		                                <div class="ml-2 mr-2">선두께  <input type="number"  id="line_width" min="1" max="20" value="1"  class="border"></div>
+		                                <div class="ml-2 mr-2">폰트크기     <input type="number"  id="font_size" min="13" max="60" value="13"  class="border"></div>
+		                            </div>
+		                                
+		                            <div class=" col-12 d-flex justify-content-start mt-2 ">
+		                                <div class="bg3 fc1 p-2  col-2">에디터영역</div>
+		                                <table class="table board mt-2">
+		                                    <thead>
+		                                        <tr class="col-12 d-flex justify-content-between bg-light ">
+		                                        </tr>
+		                                    </thead>
+		                                </table>
+		                            </div>
+		                        </div>
+		                    </div>
+
+		                    <div class="mt-2 border por ov " id="can_box" style="width: 1100px; height: 600px; ">
+		                        <canvas width="1100" height="600" id="tmp_can" style="z-index:88888" class="poa"></canvas>
+		                    </div>  
+		                </div>
+
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+
+	<!-- 텍스트 모달 -->
+	<div class="menu-con menu-pop w-100 h-100 position-fixed" id="txt_modal">
+		<div class="w-100 h-100 d-flex fl-cc">
+			<label for="pop_close" class="poa closeBtn t0 l0 w-100 h-100"></label>
+			<div class="itemBox por w-25">
+				<div class="item p-4 w-100">
+					<div class="picBox w-100 h-100 d-flex fl-cc">
+						<div class="pic w-100 d-flex fl-cc font-weight-bold fz30 bg0 fc1 text-center">
+							텍스트 모달
+						</div>
+					</div>
+					<div class="cont p-4 d-flex fl-cc w-100">
+						
+						<form enctype="multipart/form-data" method="post" novlidate class="w-100">
+							<input type="hidden" name="mode" value="mode">
+							<input type="hidden" name="no" value="no">
+							<div class="form-row col-12 por mt-4">
+								<div class="form-group col-12 por d-flex fl-cc ">
+									<input type="number" name="tx" id="tx" class="form-control formChk tx" required>
+									<label for="tx" class="poa t0 l0" >X좌표</label>
+									<div class="meter"></div>
+								</div>
+							</div>	
+							<div class="form-row col-12 por mt-4">
+								<div class="form-group col-12 por d-flex fl-cc  ">
+									<input type="number" name="ty" id="ty" class="form-control formChk ty" required>
+									<label for="ty" class="poa t0 l0" >Y좌표</label>
+									<div class="meter"></div>
+								</div>
+							</div>
+							<div class="form-row col-12 por mt-4">
+								<div class="form-group col-12 por d-flex fl-cc  was-validated">
+									<textarea type="text" name="content" id="in_txt" class="form-control formChk content" required></textarea>
+									<label for="content" class="poa t0 l0 font-weight-bold" style="top: -30px;">내용</label>
+									<div class="meter"></div>
+								</div>
+							</div>
+							<div class="form-row col-12 por mt-4">
+								<div class="form-group w-100 por d-flex fl-cc ">
+									<button class="bg1 col-4 p-1 ml-1 fc1 at_sc12 " type="button" onclick="$('#txt_modal').hide();">취소</button>
+									<button class="bg0 col-4 p-1 ml-1 fc1 at_sc12 okBtn" type="button">삽입</button>
+								</div>
+							</div>
+							
+						</form>
+
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+
+	<!-- 이미지 모달 -->
+	<div class="menu-con menu-pop w-100 h-100 position-fixed" id="img_modal">
+		<div class="w-100 h-100 d-flex fl-cc">
+			<label for="pop_close" class="poa closeBtn t0 l0 w-100 h-100"></label>
+			<div class="itemBox por w-25">
+				<div class="item p-4 w-100">
+					<div class="picBox w-100 h-100 d-flex fl-cc">
+						<div class="pic w-100 d-flex fl-cc font-weight-bold fz30 bg0 fc1 text-center">
+							이미지 모달
+						</div>
+					</div>
+					<div class="cont p-4 d-flex fl-cc w-100">
+						
+						<form enctype="multipart/form-data" method="post" novlidate class="w-100">
+							<input type="hidden" name="mode" value="mode">
+							<input type="hidden" name="no" value="no">
+							<div class="form-row w-100 por">
+								<div class="form-group w-100 por d-flex fl-cc">
+									<select class="custom-select formChk" id="sel_img" required>
+								      <option value="">이미지를 선택해주세요.</option>
+								      <option value="1.jpg">1.jpg</option>
+								      <option value="2.jpg">2.jpg</option>
+								      <option value="3.jpg">3.jpg</option>
+								      <option value="4.jpg">4.jpg</option>
+								      <option value="5.jpg">5.jpg</option>
+								      <option value="6.jpg">6.jpg</option>
+								    </select>
+								    <div class="invalid-feedback">이미지를 선택해주세요</div>
+								</div>
+							</div>
+
+							<div class="form-row col-12 por mt-4">
+								<div class="form-group w-100 por d-flex fl-cc ">
+									<button class="bg1 col-4 p-1 ml-1 fc1 at_sc12 " type="button" onclick="$('#img_modal').hide();">취소</button>
+									<button class="bg0 col-4 p-1 ml-1 fc1 at_sc12 okBtn" type="button">삽입</button>
+								</div>
+							</div>
+							
+						</form>
+
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+
+
+	<!-- 영상 모달 -->
+	<div class="menu-con menu-pop w-100 h-100 position-fixed" id="mov_modal">
+		<div class="w-100 h-100 d-flex fl-cc">
+			<label for="pop_close" class="poa closeBtn t0 l0 w-100 h-100"></label>
+			<div class="itemBox por w-25">
+				<div class="item p-4 w-100">
+					<div class="picBox w-100 h-100 d-flex fl-cc">
+						<div class="pic w-100 d-flex fl-cc font-weight-bold fz30 bg0 fc1 text-center">
+							영상넣기
+						</div>
+					</div>
+					<div class="cont p-4 d-flex fl-cc w-100">
+						
+						<form enctype="multipart/form-data" method="post" novlidate class="w-100">
+							<input type="hidden" name="mode" value="mode">
+							<input type="hidden" name="no" value="no">
+							<div class="form-row w-100 por">
+								<div class="form-group w-100 por d-flex fl-cc">
+									<select class="custom-select formChk" id="sel_mov" required>
+								      <option value="">영상을 선택해주세요.</option>
+								      <option value="ex.mp4">ex.mp4</option>
+								    </select>
+								    <div class="invalid-feedback">영상을 선택해주세요</div>
+								</div>
+							</div>
+
+							<div class="form-row col-12 por mt-4">
+								<div class="form-group w-100 por d-flex fl-cc ">
+									<button class="bg1 col-4 p-1 ml-1 fc1 at_sc12 " type="button" onclick="$('#mov_modal').hide();">취소</button>
+									<button class="bg0 col-4 p-1 ml-1 fc1 at_sc12 okBtn" type="button">삽입</button>
+								</div>
+							</div>
+							
+						</form>
+
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	
+
+
+
+	<!-- 스크린 -->
+	<div class="screen">
+		<!-- 헤더 -->
+		<header class="w-100 d-flex justify-content-center text-center">
+			<div class="logo poa">
+				<a href="/" title="logo" class="at_sc12"><img src="/images/logo.png" alt="logo" title="logo"></a>
+			</div>
+			<input type="radio" name="nav" id="nav_open">
+			<input type="radio" name="nav" id="nav_close" checked="">
+			<nav class="nav_1 col-12 d-flex justify-content-between align-items-center">
+				<ul class="col-4 col-480-12 d-flex justify-content-end align-items-center por">
+					<li class="col-2 d-flex justify-content-center align-items-center por">
+						<a href="#" title="link" class="por d-flex fl-cc">
+							<span>　</span>
+						</a>
+						<ul class="w-100 poa">
+							<li class="w-100"><a href="#" title="link">　</a></li>
+						</ul>
+					</li>
+					<li class="col-2 d-flex justify-content-center align-items-center por">
+						<a href="#" title="link" class="por d-flex fl-cc">
+							<span>　</span>
+						</a>
+						<ul class="w-100 poa">
+							<li class="w-100"><a href="#" title="link">　</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="col-4 col-480-12 d-flex justify-content-start align-items-center por">
+					<li class="col-2 d-flex justify-content-center align-items-center por at_sc12">
+						<a href="#" title="link" class="por d-flex fl-cc fz14 fc1">
+							<span  class="hide_480">로그인</span>
+						</a>
+						<ul class="w-100 poa">
+							<li class="w-100"><a href="#" title="link">　</a></li>
+						</ul>
+					</li>
+					<li class="col-2 d-flex justify-content-center align-items-center por at_sc12">
+						<a href="#" title="link" class="por d-flex fl-cc fz14 fc1">
+							<span  class="hide_480">회원가입</span>
+						</a>
+						<ul class="w-100 poa">
+							<li class="w-100"><a href="#" title="link">　</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="hamBtn poa t0 r0">
+					<label for="nav_open"  class="poa r0 t0 at_sc12"><img src="/images/hamBtn.png" alt="img" title="img"></label>
+					<label for="nav_close" class="poa r0 t0 at_sc12"><img src="/images/hamBtn.png" alt="img" title="img"></label>
+				</div>
+			</nav>
+			<nav class="nav_2 col-12 d-flex justify-content-between align-items-center">
+				<ul class="col-12 gnb d-flex justify-content-center align-items-center por">
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="#" title="전주독서대전" class="por d-flex fl-cc font-weight-bolder ">
+							<span>전주독서대전</span>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+						</a>
+						<ul class="w-100 poa fz14">
+							<li class="w-100"><a href="#" title="대전소개">대전소개</a></li>
+							<li class="w-100 d-flex justify-content-center">
+								<a href="/page/join/" title="회원가입">회원가입</a>
+								<span class="hide_480">&nbsp;/&nbsp;</span>
+								<span class="show_480">/</span>
+								<a href="/page/login/" title="로그인">로그인</a>
+							</li>
+							<li class="w-100"><a href="overview.html" title="행사개요">행사개요</a></li>
+						</ul>
+					</li>
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="/page/book.html" title="온라인 책만들기" class="por d-flex fl-cc font-weight-bolder ">
+							<span>온라인 책만들기</span>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+						</a>
+					</li>
+					<li class=" por hide_480" style="width: 500px;">
+						<a href="#" title="link" class="por d-flex fl-cc font-weight-bolder ">
+							<span>&nbsp;</span>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+						</a>
+					</li>
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="#" title="독자와의 만남" class="por d-flex fl-cc font-weight-bolder ">
+							<span>독자와의 만남</span>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+						</a>
+						<ul class="w-100 poa fz14">
+							<li class="w-100"><a href="/page/reserve/" title="link">예약하기</a></li>
+							<li class="w-100"><a href="/page/reserve/manage/" title="link">예약확인</a></li>
+						</ul>
+					</li>
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="#" title="관리자페이지" class="por d-flex fl-cc font-weight-bolder ">
+							<span>관리자페이지</span>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+						</a>
+						<ul class="w-100 poa fz14">
+							<li class="w-100"><a href="/page/admin/" title="행사등록">행사등록</a></li>
+							<li class="w-100"><a href="/page/admin/manage/" title="예약관리">예약관리</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- 비주얼 -->
+		<section class="visual_sub w-100 por" id="visual">
+			<div class="patt1 poa w-100 l0 t0" style="z-index: 99; background: url('/images/patt1.png'); height: 19px; margin-top: 12px;"></div>
+			<div class="cover poa h-100 t0 l0"></div>
+			<div class="box w-100 h-100 por">
+				<input type="radio" name="slide" id="s_default" checked>
+				<input type="radio" name="slide" id="s_left_1">
+				<input type="radio" name="slide" id="s_left_2">
+				<input type="radio" name="slide" id="s_left_3">
+				<input type="radio" name="slide" id="s_left_4">
+				<input type="radio" name="slide" id="s_left_5">
+				<input type="radio" name="slide" id="s_left_6">
+				<input type="radio" name="slide" id="s_right_1">
+				<input type="radio" name="slide" id="s_right_2">
+				<input type="radio" name="slide" id="s_right_3">
+				<input type="radio" name="slide" id="s_right_4">
+				<input type="radio" name="slide" id="s_right_5">
+				<input type="radio" name="slide" id="s_right_6">
+				<input type="radio" name="slide" id="s_go_1">
+				<input type="radio" name="slide" id="s_go_3">
+				<input type="radio" name="slide" id="s_go_4">
+				<input type="radio" name="slide" id="s_go_6">
+
+				<div class="slideBox w-100 h-100 por">
+					<ul class="slide h-100 poa d-flex justify-content-between">
+						<li class="h-100 por d-flex fl-cc">
+							<img src="/images/slide_1.png" alt="slide" title="slide">
+							<div class="s_bg poa" style="background: url('/images/s_bg.png');"></div>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+							<div class="txt poa d-flex fl-cc">
+								<div class="por fc1">
+									<div class="fz24 font-weight-bolder">2020 전주독서대전</div>
+									<div class="fz16 mt-2">
+										" 책 읽는 도시 글 쓰는 전주 " <br>
+										2020. 9. 18.(금) ~ 9. 20.(일) <br>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="h-100 por d-flex fl-cc">
+							<img src="/images/slide_2.png" alt="slide" title="slide">
+							<div class="s_bg poa" style="background: url('/images/s_bg.png');"></div>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+							<div class="txt poa d-flex fl-cc">
+								<div class="por fc1">
+									<div class="fz24 font-weight-bolder">2020 전주독서대전</div>
+									<div class="fz16 mt-2">
+										" 책 읽는 도시 글 쓰는 전주 " <br>
+										2020. 9. 18.(금) ~ 9. 20.(일) <br>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="h-100 por d-flex fl-cc">
+							<img src="/images/slide_3.png" alt="slide" title="slide">
+							<div class="s_bg poa" style="background: url('/images/s_bg.png');"></div>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+							<div class="txt poa d-flex fl-cc">
+								<div class="por fc1">
+									<div class="fz24 font-weight-bolder">2020 전주독서대전</div>
+									<div class="fz16 mt-2">
+										" 책 읽는 도시 글 쓰는 전주 " <br>
+										2020. 9. 18.(금) ~ 9. 20.(일) <br>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="h-100 por d-flex fl-cc">
+							<img src="/images/slide_1.png" alt="slide" title="slide">
+							<div class="s_bg poa" style="background: url('/images/s_bg.png');"></div>
+							<svg class="poa"><rect class="w-100 h-100" width="0" height="0"></rect></svg>
+							<div class="txt poa d-flex fl-cc">
+								<div class="por fc1">
+									<div class="fz24 font-weight-bolder">2020 전주독서대전</div>
+									<div class="fz16 mt-2">
+										" 책 읽는 도시 글 쓰는 전주 " <br>
+										2020. 9. 18.(금) ~ 9. 20.(일) <br>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+
+					<div class="btnBox btnBox1 poa">
+						<ul class="por w-100 h-100">
+							<li class="w-100 h-100 poa d-flex justify-content-between align-items-center">
+								<label for="s_right_1"><img src="/images/btn1.png" alt="btn" title="btn"></label>
+								<label for="s_left_1"><img src="/images/btn2.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-between align-items-center">
+								<label for="s_right_2"><img src="/images/btn1.png" alt="btn" title="btn"></label>
+								<label for="s_left_2"><img src="/images/btn2.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-between align-items-center">
+								<label for="s_right_3"><img src="/images/btn1.png" alt="btn" title="btn"></label>
+								<label for="s_left_3"><img src="/images/btn2.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-between align-items-center">
+								<label for="s_right_4"><img src="/images/btn1.png" alt="btn" title="btn"></label>
+								<label for="s_left_4"><img src="/images/btn2.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-between align-items-center">
+								<label for="s_right_5"><img src="/images/btn1.png" alt="btn" title="btn"></label>
+								<label for="s_left_5"><img src="/images/btn2.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-between align-items-center">
+								<label for="s_right_6"><img src="/images/btn1.png" alt="btn" title="btn"></label>
+								<label for="s_left_6"><img src="/images/btn2.png" alt="btn" title="btn"></label>
+							</li>
+						</ul>
+					</div>
+
+					<div class="btnBox btnBox2 poa">
+						<ul class="por w-100 h-100">
+							<li class="w-100 h-100 poa d-flex justify-content-center align-items-center">
+								<label for=""><img src="/images/indi1_ov.png" alt="btn" title="btn"></label>
+								<label for="s_left_1"><img src="/images/indi2.png" alt="btn" title="btn"></label>
+								<label for="s_go_1"><img src="/images/indi3.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-center align-items-center">
+								<label for="s_right_2"><img src="/images/indi1.png" alt="btn" title="btn"></label>
+								<label for=""><img src="/images/indi2_ov.png" alt="btn" title="btn"></label>
+								<label for="s_left_2"><img src="/images/indi3.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-center align-items-center">
+								<label for="s_go_3"><img src="/images/indi1.png" alt="btn" title="btn"></label>
+								<label for="s_right_3"><img src="/images/indi2.png" alt="btn" title="btn"></label>
+								<label for=""><img src="/images/indi3_ov.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-center align-items-center">
+								<label for=""><img src="/images/indi1_ov.png" alt="btn" title="btn"></label>
+								<label for="s_left_4"><img src="/images/indi2.png" alt="btn" title="btn"></label>
+								<label for="s_go_4"><img src="/images/indi3.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-center align-items-center">
+								<label for="s_right_5"><img src="/images/indi1.png" alt="btn" title="btn"></label>
+								<label for=""><img src="/images/indi2_ov.png" alt="btn" title="btn"></label>
+								<label for="s_left_5"><img src="/images/indi3.png" alt="btn" title="btn"></label>
+							</li>
+							<li class="w-100 h-100 poa d-flex justify-content-center align-items-center">
+								<label for="s_go_6"><img src="/images/indi1.png" alt="btn" title="btn"></label>
+								<label for="s_right_6"><img src="/images/indi2.png" alt="btn" title="btn"></label>
+								<label for=""><img src="/images/indi3_ov.png" alt="btn" title="btn"></label>
+							</li>
+						</ul>
+					</div>
+
+
+				</div>
+
+			</div>
+		</section>
+
+
+
+		<!-- 콘텐츠 -->
+		<section class="con-sub w-100" id="bookBox">
+			<div class="wrap col-480-12">
+				<div class="titleBox w-100">
+					<div class="itemBox w-100 d-flex fz24 font-weight-bold mb-0">
+						온라인 책만들기
+					</div>
+					<div class="itemBox w-100 d-flex justify-content-end fz16 ">
+						<a href="#" title="link">홈</a>
+						<span>&nbsp;/&nbsp;</span>
+						<a href="#" title="link">온라인 책만들기</a>
+					</div>
+					<img src="/images/patt2.png" alt="title" title="title" class="w-100">
+				</div>
+				<div class="conBox w-100 d-flex justify-content-center">
+			
+					<div class="itemBox col-12 d-flex justify-content-start mt-1 ">
+	                    <table class="table ">
+	                        <thead>
+	                            <tr class="col-12 d-flex justify-content-between bg-light ">
+	                            </tr>
+	                        </thead>
+	                    </table>
+	                    <div class="col-12 col-480-12 d-flex justify-content-end align-items-center " style="height: 50px;" id="searchBox">
+	                        <input type="search" name="search" class="form-control searchInput col-2 pl-2 ml-1 h-100" autocomplete="off" required="" placeholder="검색어를 입력해주세요.">
+	                        <button class="bg-secondary h-100 p-2 fc1 searchBtn at_sc12" type="button">검색</button>
+	                    </div>
+	                </div>
+					
+					<div class="itemBox col-12 d-flex justify-content-start mt-1 " id="listBox"></div>
+
+				</div>
+			</div>
+		</section>
+
+	
+
+		<!-- 푸터 -->
+		<footer class="w-100 por text-center fc1 d-flex justify-content-center">
+			<div class="logo poa hv_sc12 ">
+				<div>
+					<a href="#" title="logo" class="at_sc12"><img src="/images/logo.png" alt="logo" title="logo"></a>
+				</div>
+			</div>
+			
+			<nav class="nav_2 col-12 d-flex justify-content-between align-items-center" style="margin-top: 200px;">
+				<ul class="col-12 gnb d-flex justify-content-center align-items-center por">
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="#" title="전주독서대전" class="por d-flex fl-cc font-weight-bolder ">
+							<span>전주독서대전</span>
+						</a>
+						<ul class="w-100 poa fz14">
+							<li class="w-100"><a href="#" title="대전소개">대전소개</a></li>
+							<li class="w-100 d-flex justify-content-center">
+								<a href="#" title="회원가입">회원가입</a>
+								<span class="hide_480">&nbsp;/&nbsp;</span>
+								<span class="show_480">/</span>
+								<a href="#" title="로그인">로그인</a>
+							</li>
+							<li class="w-100"><a href="overview.html" title="행사개요">행사개요</a></li>
+						</ul>
+					</li>
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="#" title="온라인 책만들기" class="por d-flex fl-cc font-weight-bolder ">
+							<span>온라인 책만들기</span>
+						</a>
+					</li>
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="#" title="독자와의 만남" class="por d-flex fl-cc font-weight-bolder ">
+							<span>독자와의 만남</span>
+						</a>
+						<ul class="w-100 poa fz14">
+							<li class="w-100"><a href="#" title="link">예약하기</a></li>
+							<li class="w-100"><a href="#" title="link">예약확인</a></li>
+						</ul>
+					</li>
+					<li class=" d-flex justify-content-center align-items-center por">
+						<a href="#" title="관리자페이지" class="por d-flex fl-cc font-weight-bolder ">
+							<span>관리자페이지</span>
+						</a>
+						<ul class="w-100 poa fz14">
+							<li class="w-100"><a href="#" title="행사등록">행사등록</a></li>
+							<li class="w-100"><a href="#" title="예약관리">예약관리</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+
+			<ul class="iconBox por  d-flex" style="margin-top: 120px;">
+				<li class="por d-flex fl-cc">
+					<a href="#" title="icon" class="por d-flex fl-cc w-100 h-100 ">
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+					</a>
+				</li>
+				<li class="por d-flex fl-cc">
+					<a href="#" title="icon" class="por d-flex fl-cc w-100 h-100 ">
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+					</a>
+				</li>
+				<li class="por d-flex fl-cc">
+					<a href="#" title="icon" class="por d-flex fl-cc w-100 h-100 ">
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+						<div class="poa w-100 h-100 t0 l0 fz30 font-weight-bold"></div>
+					</a>
+				</li>
+			</ul>
+
+
+			<div class="txt w-100 d-flex fl-cc" style="margin-top: 50px;">
+				(54819) 전주시 덕진구 솔내로 212(송천동2가 168-5) | 전화 : 063-281-6535 | 팩스 : 063-281-5286 <br>
+				Copyright 2020 전주독서대전. All rights reserved.
+			</div>
+			
+
+		</footer>
+
+
+
+	</div>
+
+
+
+</body>
+</html>
